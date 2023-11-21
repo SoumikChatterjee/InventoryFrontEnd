@@ -72,7 +72,8 @@ export class AddProductComponent {
         userType: this.au.user.role,
         orderDate: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
         item: response.id,
-        quantity: response.quantity
+        quantity: response.quantity,
+        isPaid:false
       }).subscribe(res => { 
         console.log(res);
       });

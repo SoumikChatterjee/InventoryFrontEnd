@@ -14,7 +14,7 @@ declare let Razorpay: any;
 export class CartComponent {
   orders: Array<Order> = [];
   Products: Array<Product> = [];
-  constructor(private os: OrderService, private ps: ProductService, private au: AuthService, private router:Router) {
+  constructor(private os: OrderService, private ps: ProductService, private au: AuthService, private router: Router) {
     os.getAllOrders().subscribe(res => {
       this.orders = res;
       this.orders = this.orders.filter((order) => {
@@ -54,22 +54,24 @@ export class CartComponent {
     const promises = this.orders.map(async (order) => {
       order.isPaid = true; await this.os.putOrderById(order.id, order).toPromise(); const product = await this.ps.getProductsById(order.item).toPromise();
 
-      product.quantity -= order.quantity;
-      product.sold += order.quantity;
-      total += product.price * order.quantity;
+      if (product) {
+        product.quantity -= order.quantity;
+        product.sold += order.quantity;
+        total += product.price * order.quantity;
 
-      await this.ps.putProductById(product.id, product).toPromise();
+        await this.ps.putProductById(product.id, product).toPromise();
+      }
     });
 
     // wait for all the Promises to resolve and then log the total
     Promise.all(promises)
-  .then(() => {
-    console.log(total);
-    this.payNow(total);
-  })
-  .then(() => {
-    this.router.navigate(['/orders']);
-  });
+      .then(() => {
+        console.log(total);
+        this.payNow(total);
+      })
+      .then(() => {
+        this.router.navigate(['/orders']);
+      });
   }
 
   payNow(total: number) {
@@ -107,10 +109,10 @@ export class CartComponent {
 
     try {
       Razorpay.open(RozarpayOptions, successCallback, failureCallback);
-    } catch(error) {
+    } catch (error) {
       console.log('Error:', error);
     }
 
   }
-  
+
 }

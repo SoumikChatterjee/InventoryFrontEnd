@@ -1,6 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { Chart } from 'chart.js';
-import { ChartModule } from 'primeng/chart';
+import { Component } from '@angular/core';
+
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({

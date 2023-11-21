@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private cachedUserData: any[] = [];
+  private cachedUserData: User[] = [];
   public UserDataFlag = false;
   constructor(private http:HttpClient) { }
   url="http://localhost:5242/api/Users";
-  getAllUsers():Observable<any>
+  getAllUsers():Observable<User[]>
   {    
     if (this.UserDataFlag) {
       // Return cached data if available
@@ -23,7 +24,7 @@ export class UserService {
       console.log("Api fetched");
       
       this.UserDataFlag = true;
-      return this.http.get<any[]>(this.url).pipe(
+      return this.http.get<User[]>(this.url).pipe(
         map((data) => {
           this.cachedUserData = data;
           return data;
@@ -32,32 +33,32 @@ export class UserService {
     }
     
   }
-  getUsersById(id:any):Observable<any>
+  getUsersById(id:User):Observable<User>
   {
-    return this.http.get<any[]>(this.url+"/"+id);
+    return this.http.get<User>(this.url+"/"+id);
   }
-  deleteUsersById(id:any):Observable<any>{
+  deleteUsersById(id:string):Observable<string>{
     this.UserDataFlag=false;
-    return this.http.delete(this.url+"/"+ id);
+    return this.http.delete<string>(this.url+"/"+ id);
   }
-  putUserById(id:any,record:any):Observable<any>{
+  putUserById(id:string,record:User):Observable<string>{
     this.UserDataFlag=false;
-    return this.http.put(this.url+"/" + id,
+    return this.http.put<string>(this.url+"/" + id,
     JSON.stringify(record),
     {
       headers: { 'Content-Type': 'application/json', },
     });
   }
-  postUser(record:any):Observable<any>{
+  postUser(record:User):Observable<User>{
     this.UserDataFlag=false;
-    return this.http.post<any>(this.url, JSON.stringify(record), {
+    return this.http.post<User>(this.url, JSON.stringify(record), {
       headers: {
         'Content-Type': 'application/json',
       },
     });
   }
-  getUserByEmail(email:string,password:string):Observable<any>{
+  getUserByEmail(email:string,password:string):Observable<User>{
     const url = `${this.url}/login?email=${email}&password=${password}`;
-    return this.http.get<any[]>(url);
+    return this.http.get<User>(url);
   }
 }

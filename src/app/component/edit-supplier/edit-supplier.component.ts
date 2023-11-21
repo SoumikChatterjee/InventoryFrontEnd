@@ -37,12 +37,12 @@ export class EditSupplierComponent {
     })
   }
   submit(){
-    const newSupplier={
-      id:this.supplier?.id,
+    const newSupplier:Supplier={
+      id:this.supplier?.id??'',
       name:this.fg.value.name,
       email:this.fg.value.email,
       phone:this.fg.value.phone,
-      products:this.supplier?.products
+      products:this.supplier?.products??[]
     }
     this.ss.putSupplierById(this.id,newSupplier).subscribe(res=>{
       console.log(res);

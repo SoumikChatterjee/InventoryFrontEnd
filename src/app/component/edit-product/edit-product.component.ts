@@ -51,8 +51,8 @@ export class EditProductComponent {
     });
   }
   submit() {
-    const newProduct = {
-      id: this.data?.id,
+    const newProduct:Product = {
+      id: this.data?.id??'',
       name: this.editFormGroup.get('name')?.value ?? '',
       description: this.editFormGroup.get('description')?.value ?? '',
       sku: this.editFormGroup.get('sku')?.value ?? '',
@@ -63,6 +63,7 @@ export class EditProductComponent {
       quantity: this.editFormGroup.get('quantity')?.value ?? 0,
       sold: this.editFormGroup.get('sold')?.value ?? 0,
       images: this.editFormGroup.get('images')?.value ?? 0
+
     }
     console.log(newProduct);
     this.ps.putProductById(this.id,newProduct).subscribe((response) => {

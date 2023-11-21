@@ -1,18 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
+import { Order } from '../models/Order';
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  private cachedOrderData: any[] = [];
+  private cachedOrderData: Order[] = [];
   public OrderDataFlag = false;
 
   url="http://localhost:5242/api/Order";
   constructor(private http:HttpClient) { }
 
-  getAllOrders():Observable<any>
+  getAllOrders():Observable<Order[]>
   {
     if (this.OrderDataFlag) {
       // Return cached data if available
@@ -24,7 +25,7 @@ export class OrderService {
       console.log("Api fetched");
       
       this.OrderDataFlag = true;
-      return this.http.get<any[]>(this.url).pipe(
+      return this.http.get<Order[]>(this.url).pipe(
         map(data => {
           this.cachedOrderData = data;
           return data;
@@ -33,25 +34,25 @@ export class OrderService {
     }
     
   }
-  getOrdersById(id:any):Observable<any>
+  getOrdersById(id:string):Observable<Order>
   {
-    return this.http.get<any[]>(this.url+"/"+id);
+    return this.http.get<Order>(this.url+"/"+id);
   }
-  deleteOrdersById(id:any):Observable<any>{
-    this.OrderDataFlag=false;
-    return this.http.delete(this.url+"/"+ id);
+  deleteOrdersById(id:string):Observable<string>{
+    this.OrderDataFlag=false;    
+    return this.http.delete<string>(this.url+"/"+ id);
   }
-  putOrderById(id:any,record:any):Observable<any>{
+  putOrderById(id:string,record:Order):Observable<Order>{
     this.OrderDataFlag=false;
-    return this.http.put(this.url+"/" + id,
+    return this.http.put<Order>(this.url+"/" + id,
     JSON.stringify(record),
     {
       headers: { 'Content-Type': 'application/json', },
     });
   }
-  postOrder(record:any):Observable<any>{
+  postOrder(record:Order):Observable<Order>{
     this.OrderDataFlag=false;
-    return this.http.post<any>(this.url, JSON.stringify(record), {
+    return this.http.post<Order>(this.url, JSON.stringify(record), {
       headers: {
         'Content-Type': 'application/json',
       },
