@@ -1,0 +1,33 @@
+<h1 *ngIf="suppliers.length > 0">Supplier Details</h1>
+<div class="table">
+    <h2 *ngIf="suppliers.length === 0">No Supplier Details Available</h2>
+    <table class="table table-striped" *ngIf="suppliers.length > 0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Products Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let supplier of suppliers">
+                <td>{{ supplier.id }}</td>
+                <td>{{ supplier.name }}</td>
+                <td>{{ supplier.email }}</td>
+                <td>{{ supplier.phone }}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let product of supplier.products">
+                            {{ product }}
+                        </li>
+                    </ul>
+                </td>
+                <td><button *ngIf="(au.user.role==='Admin'||au.user.role==='Manager')" routerLink="/edit-supplier/{{supplier.id}}">Edit Details</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

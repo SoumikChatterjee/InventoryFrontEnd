@@ -1,0 +1,51 @@
+
+<div class="container">
+    <h2>Add Product</h2>
+    <form [formGroup]="editFormGroup">
+      <div class="form-group" >
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" value="Lorem1" formControlName="name">
+      </div>
+      <div class="form-group">
+        <label for="description" >Description:</label>
+        <textarea class="form-control" id="description" formControlName="description"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="sku">SKU No.:</label>
+          <input type="text" class="form-control" id="sku" formControlName="sku">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="category">Category:</label>
+          <input type="text" class="form-control" id="category" formControlName="category">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="manufacturer">Manufacturer:</label>
+        <input type="text" class="form-control" id="manufacturer"  formControlName="manufacturer">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="price">Price:</label>
+          <input type="number" class="form-control" id="price" formControlName="price">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="price">PriceAgreement:</label>
+          <input type="number" class="form-control" id="price" formControlName="priceAgreement">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="quantity">Available Quantity:</label>
+          <input type="number" class="form-control" id="quantity" formControlName="quantity">
+        </div>
+      </div>
+      <!-- <div class="form-group">
+        <label for="sold">Items Sold:</label>
+        <input type="number" class="form-control" id="sold" value="4" formControlName="sold">
+      </div> -->
+      <div class="form-group">
+        <label for="image">Image Url:</label>
+        <input type="text" class="form-control" id="image"  formControlName="images">
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="submit()">Save</button>
+    </form>
+  </div>

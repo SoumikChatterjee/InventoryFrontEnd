@@ -1,0 +1,28 @@
+<h2 *ngIf="Orders.length > 0">Purchase Order</h2>
+<div class="container-fluid">
+    <h2 *ngIf="Orders.length === 0">No orders found.</h2>
+
+    <table class="table table-striped" *ngIf="Orders.length > 0">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Order Date</th>
+                <th>Quantity</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of Orders">
+                <td>{{ user.id }}</td>
+                <td>{{ user.item }}</td>
+                <td>{{getProductNameById(user.item)}}</td>
+                <td>{{ user.orderDate }}</td>
+                <td>{{ user.quantity }}</td>
+                <td><img src="{{getProductImgUrlById(user.item)}}" alt=""></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

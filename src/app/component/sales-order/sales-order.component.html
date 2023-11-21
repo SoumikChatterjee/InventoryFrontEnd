@@ -1,0 +1,31 @@
+<h1 *ngIf="Orders.length > 0">Sales Order</h1>
+<div class="table">
+
+    <h2 *ngIf="Orders.length === 0">No orders found.</h2>
+
+    <table class="table table-striped" *ngIf="Orders.length > 0">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Order Date</th>
+                <th>Quantity</th>
+                <th>Image</th>
+                <th>Customer's Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of Orders">
+                <td>{{ user.id }}</td>
+                <td>{{ user.item }}</td>
+                <td>{{getProductNameById(user.item)}}</td>
+                <td>{{ user.orderDate }}</td>
+                <td>{{ user.quantity }}</td>
+                <td><img src="{{getProductImgUrlById(user.item)}}" alt=""></td>
+                <td>{{user.userEmail}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

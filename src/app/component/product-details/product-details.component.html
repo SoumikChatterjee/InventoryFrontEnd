@@ -1,0 +1,30 @@
+<br>
+
+<div class="product-container">
+    <div class="product-image">
+      <img [src]="product.images[0]" alt="">
+    </div>
+    <div class="product-details">
+      <h1 class="product-name">{{product.name}}</h1>
+      <p class="product-manufacturer">by {{product.manufacturer}}</p>
+      <div class="product-metadata">
+        <p class="product-id"><span>Product Id:</span>{{product.id}}</p>
+        <p class="product-sku"><span>SKU No.:</span>{{product.sku}}</p>
+        <p class="product-category"><span>Category:</span>{{product.category}}</p>
+      </div>
+      <div class="product-description">
+        <h2 class="section-title">Description:</h2>
+        <p class="section-text">{{product.description}}</p>
+      </div>
+      <div class="product-pricing">
+        <h2 class="section-title">Pricing:</h2>
+        <p class="product-price"><span>Price:</span> ₹{{product.price}}</p>
+        <p *ngIf="au.user.role==='Admin'||au.user.role==='Manager'" class="product-price-agreement"><span>Price Agreement:</span> ₹{{product.priceAgreement}}</p>
+      </div>
+      <div class="product-stock">
+        <h2 class="section-title">Stock:</h2>
+        <p class="product-quantity"><span>Quantity:</span> {{product.quantity}}</p>
+        <p class="product-sold"><span>Items Sold:</span> {{product.sold}}</p>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,5 @@
+<h2>Scan below</h2>
+<div class="scanner">
+    <zxing-scanner  [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
+        [formats]="formatsEnabled" (camerasFound)="onCamerasFound($event)" ></zxing-scanner>
+</div>

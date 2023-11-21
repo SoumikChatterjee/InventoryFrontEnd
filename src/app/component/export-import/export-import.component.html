@@ -1,0 +1,10 @@
+<form action="" [formGroup]="fg">
+  <label for="fileInput">Name of the file:</label>
+  <input placeholder="sample.csv" formControlName="fc" id="fileInput">
+</form>
+
+<button (click)="exportCsv()">Save</button>
+
+<br>
+<!-- <input class="form-control" accept=".csv" id="csv" type="file" 
+  (change)="onFileSelect($event.target)" name="myfile"> -->
